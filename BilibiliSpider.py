@@ -1,4 +1,4 @@
-#coding:utf8
+#-encoding:utf8-
 import requests
 import pymysql
 from tqdm import tqdm
@@ -10,7 +10,7 @@ import Database_config
 
 class BilibiliSpider():
 
-#url = 'http://api.bilibili.com/archive_rank/getarchiverankbypartion?type=jsonp&tid=33&pn=' + pn
+    #url = 'http://api.bilibili.com/archive_rank/getarchiverankbypartion?type=jsonp&tid=33&pn=' + pn
     def __init__(self, action, tid, pn, table_name, rangeX, rangeY, type = 'json', base_url = 'http://api.bilibili.com/archive_rank/'):
         '''
         :param action: url动作
@@ -142,7 +142,7 @@ class BilibiliSpider():
             print(e)
 
     def start(self):
-        for x in range(self.rangeX, self.rangeY):
+        for x in range(self.rangeX, self.rangeY + 1):
             self.pn = x
             self.save()
             time.sleep(0.3)
