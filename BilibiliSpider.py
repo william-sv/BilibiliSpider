@@ -1,4 +1,4 @@
-#-encoding:utf8-
+#coding:utf8
 import requests
 import pymysql
 from tqdm import tqdm
