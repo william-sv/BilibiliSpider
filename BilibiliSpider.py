@@ -11,16 +11,16 @@ import Database_config
 class BilibiliSpider():
 
     #url = 'http://api.bilibili.com/archive_rank/getarchiverankbypartion?type=jsonp&tid=33&pn=' + pn
-    def __init__(self, action, tid, pn, table_name, rangeX, rangeY, type = 'json', base_url = 'http://api.bilibili.com/archive_rank/'):
+    def __init__(self, action, tid, table_name, rangeX, rangeY, pn = 1, type = 'json', base_url = 'http://api.bilibili.com/archive_rank/'):
         '''
         :param action: url动作
         :param tid: 栏目名
         :param base_url: base_url
         :param type:数据类型 type=json
-        :param pn: 页码
+        :param pn: 页码 pn = 1
         :param table_name: 数据库表名
-        :param rangeX:
-        :param rangeY:
+        :param rangeX: 页码采集范围开始值
+        :param rangeY: 页码采集范围结束值
         '''
         self.action = action
         self.tid = tid
@@ -114,7 +114,8 @@ class BilibiliSpider():
 
     def create_table(self):
         try:
-            cursor = self.cursors()
+            db = self.db()
+            cursor = db.cursor()
             sql = 'CREATE TABLE `' + self.table_name + '` (' \
                                                        '`id` int(11) unsigned NOT NULL AUTO_INCREMENT,' \
                                                        '`aid` int(11) DEFAULT NULL,' \
@@ -130,7 +131,7 @@ class BilibiliSpider():
                                                        '`reply` int(11) DEFAULT NULL,' \
                                                        'PRIMARY KEY (`id`) )ENGINE=InnoDB DEFAULT CHARSET=utf8'
             cursor.execute(sql)
-            self.db().commit()
+            db.commit()
         except Exception as e:
             print(e)
 
