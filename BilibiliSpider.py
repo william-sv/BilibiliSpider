@@ -4,13 +4,14 @@ import pymysql
 from tqdm import tqdm
 import time
 import sys
+import Database_config
 
 
 
 class BilibiliSpider():
 
 #url = 'http://api.bilibili.com/archive_rank/getarchiverankbypartion?type=jsonp&tid=33&pn=' + pn
-    def __init__(self, action, tid, pn, table_name, rangeX, rangeY, host, user, pwd, database, type = 'json', base_url = 'http://api.bilibili.com/archive_rank/'):
+    def __init__(self, action, tid, pn, table_name, rangeX, rangeY, type = 'json', base_url = 'http://api.bilibili.com/archive_rank/'):
         '''
         :param action: url动作
         :param tid: 栏目名
@@ -34,10 +35,6 @@ class BilibiliSpider():
         self.table_name = table_name
         self.rangeX = rangeX
         self.rangeY = rangeY
-        self.host = host
-        self.user = user
-        self.pwd = pwd
-        self.database = database
 
 
     def results(self):
@@ -144,7 +141,7 @@ class BilibiliSpider():
 
     def db(self):
         try:
-            db = pymysql.connect(self.host, self.user, self.pwd, self.database, charset="utf8", use_unicode=True)
+            db = pymysql.connect(Database_config.HOST, Database_config.USER, Database_config.POSSWOED, Database_config.DATABASE, charset="utf8", use_unicode=True)
             return db
         except Exception as e:
             print(e)
