@@ -21,11 +21,6 @@ class BilibiliSpider():
         :param table_name: 数据库表名
         :param rangeX:
         :param rangeY:
-        :param host:
-        :param user:
-        :param pwd:
-        :param database:
-        :param charset:
         '''
         self.action = action
         self.tid = tid
